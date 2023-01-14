@@ -75,7 +75,7 @@ typedef ch_vertex ch_vec3;
 
 /* builds the 3-D convexhull */
 void convhull_3d_build(/* input arguments */
-                       ch_vertex* const in_vertices,            /* vector of input vertices; nVert x 1 */
+                       const ch_vertex* in_vertices,            /* vector of input vertices; nVert x 1 */
                        const int nVert,                         /* number of vertices */
                        /* output arguments */
                        int** out_faces,                         /* & of empty int*, output face indices; flat: nOut_faces x 3 */
@@ -83,24 +83,24 @@ void convhull_3d_build(/* input arguments */
     
 /* exports the vertices, face indices, and face normals, as an 'obj' file, ready for GPU (for 3d convexhulls only) */
 void convhull_3d_export_obj(/* input arguments */
-                            ch_vertex* const vertices,          /* vector of input vertices; nVert x 1 */
+                            const ch_vertex* vertices,          /* vector of input vertices; nVert x 1 */
                             const int nVert,                    /* number of vertices */
-                            int* const faces,                   /* face indices; flat: nFaces x 3 */
+                            const int* faces,                   /* face indices; flat: nFaces x 3 */
                             const int nFaces,                   /* number of faces in hull */
                             const int keepOnlyUsedVerticesFLAG, /* 0: exports in_vertices, 1: exports only used vertices  */
-                            char* const obj_filename);          /* obj filename, WITHOUT extension */
+                            const char* obj_filename);          /* obj filename, WITHOUT extension */
     
 /* exports the vertices, face indices, and face normals, as an 'm' file, for MatLab verification (for 3d convexhulls only) */
 void convhull_3d_export_m(/* input arguments */
-                          ch_vertex* const vertices,            /* vector of input vertices; nVert x 1 */
+                          const ch_vertex* vertices,            /* vector of input vertices; nVert x 1 */
                           const int nVert,                      /* number of vertices */
-                          int* const faces,                     /* face indices; flat: nFaces x 3 */
+                          const int* faces,                     /* face indices; flat: nFaces x 3 */
                           const int nFaces,                     /* number of faces in hull */
-                          char* const m_filename);              /* m filename, WITHOUT extension */
+                          const char* m_filename);              /* m filename, WITHOUT extension */
     
 /* reads an 'obj' file and extracts only the vertices (for 3d convexhulls only) */
 void extract_vertices_from_obj_file(/* input arguments */
-                                    char* const obj_filename,       /* obj filename, WITHOUT extension */
+                                    const char* obj_filename,       /* obj filename, WITHOUT extension */
                                     /* output arguments */
                                     ch_vertex** out_vertices,       /* & of empty ch_vertex*, output vertices; out_nVert x 1 */
                                     int* out_nVert);                /* & of int, number of vertices */
@@ -109,7 +109,7 @@ void extract_vertices_from_obj_file(/* input arguments */
 
 /* builds the N-Dimensional convexhull of a grid of points */
 void convhull_nd_build(/* input arguments */
-                       CH_FLOAT* const in_points,               /* Matrix of points in 'd' dimensions; FLAT: nPoints x d */
+                       const CH_FLOAT* in_points,               /* Matrix of points in 'd' dimensions; FLAT: nPoints x d */
                        const int nPoints,                       /* number of points */
                        const int d,                             /* Number of dimensions */
                        /* output arguments */
@@ -131,7 +131,7 @@ void delaunay_nd_mesh(/* input Arguments */
 
 /* builds the 3-D convexhull */
 void convhull_3d_build_alloc(/* input arguments */
-                             ch_vertex* const in_vertices,            /* vector of input vertices; nVert x 1 */
+                             const ch_vertex* in_vertices,            /* vector of input vertices; nVert x 1 */
                              const int nVert,                         /* number of vertices */
                              /* output arguments */
                              int** out_faces,                         /* & of empty int*, output face indices; flat: nOut_faces x 3 */
@@ -140,7 +140,7 @@ void convhull_3d_build_alloc(/* input arguments */
 
 /* builds the N-Dimensional convexhull of a grid of points */
 void convhull_nd_build_alloc(/* input arguments */
-                             CH_FLOAT* const in_points,               /* Matrix of points in 'd' dimensions; FLAT: nPoints x d */
+                             const CH_FLOAT* in_points,               /* Matrix of points in 'd' dimensions; FLAT: nPoints x d */
                              const int nPoints,                       /* number of points */
                              const int d,                             /* Number of dimensions */
                              /* output arguments */
@@ -162,7 +162,7 @@ void delaunay_nd_mesh_alloc(/* input Arguments */
 
 /* reads an 'obj' file and extracts only the vertices (for 3d convexhulls only) */
 void extract_vertices_from_obj_file_alloc(/* input arguments */
-                                          char* const obj_filename,       /* obj filename, WITHOUT extension */
+                                          const char* obj_filename,       /* obj filename, WITHOUT extension */
                                           /* output arguments */
                                           ch_vertex** out_vertices,       /* & of empty ch_vertex*, output vertices; out_nVert x 1 */
                                           int* out_nVert,                 /* & of int, number of vertices */
@@ -564,7 +564,7 @@ static CH_FLOAT rnd(int x, int y)
  */
 void convhull_3d_build
 (
-    ch_vertex* const in_vertices,
+    const ch_vertex* in_vertices,
     const int nVert,
     int** out_faces,
     int* nOut_faces
@@ -575,7 +575,7 @@ void convhull_3d_build
 
 void convhull_3d_build_alloc
 (
-    ch_vertex* const in_vertices,
+    const ch_vertex* const in_vertices,
     const int nVert,
     int** out_faces,
     int* nOut_faces,
@@ -1032,12 +1032,12 @@ void convhull_3d_build_alloc
 
 void convhull_3d_export_obj
 (
-    ch_vertex* const vertices,
+    const ch_vertex* const vertices,
     const int nVert,
-    int* const faces,
+    const int* const faces,
     const int nFaces,
     const int keepOnlyUsedVerticesFLAG,
-    char* const obj_filename
+    const char* const obj_filename
 )
 {
     int i, j;
@@ -1117,11 +1117,11 @@ void convhull_3d_export_obj
 
 void convhull_3d_export_m
 (
-    ch_vertex* const vertices,
+    const ch_vertex* const vertices,
     const int nVert,
-    int* const faces,
+    const int* const faces,
     const int nFaces,
-    char* const m_filename
+    const char* const m_filename
 )
 {
     int i;
@@ -1153,7 +1153,7 @@ void convhull_3d_export_m
 
 void extract_vertices_from_obj_file
 (
-    char* const obj_filename,
+    const char* const obj_filename,
     ch_vertex** out_vertices,
     int* out_nVert)
 {
@@ -1162,19 +1162,22 @@ void extract_vertices_from_obj_file
 
 void extract_vertices_from_obj_file_alloc
 (
-    char* const obj_filename,
+    const char* const obj_filename,
     ch_vertex** out_vertices,
     int* out_nVert,
     void* allocator
 )
 {
     FILE* obj_file;
+    char* filename_with_ext = (char*)malloc(strlen(obj_filename) + sizeof(".obj"));
+    filename_with_ext[0] = '\0';
 #if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
-    CV_STRCAT(obj_filename, ".obj");
-    fopen_s(&obj_file, obj_filename, "r");
+    CV_STRCAT(filename_with_ext, ".obj");
+    fopen_s(&obj_file, filename_with_ext, "r");
 #else
-    obj_file = fopen(strcat(obj_filename, ".obj"), "r");
+    obj_file = fopen(strcat(filename_with_ext, ".obj"), "r");
 #endif 
+    free(filename_with_ext);
     
     /* determine number of vertices */
     unsigned int nVert = 0;
@@ -1237,7 +1240,7 @@ void extract_vertices_from_obj_file_alloc
  */
 void convhull_nd_build
 (
-    CH_FLOAT* const in_vertices,
+    const CH_FLOAT* const in_vertices,
     const int nVert,
     const int d,
     int** out_faces,
@@ -1251,7 +1254,7 @@ void convhull_nd_build
 
 void convhull_nd_build_alloc
 (
-    CH_FLOAT* const in_vertices,
+    const CH_FLOAT* const in_vertices,
     const int nVert,
     const int d,
     int** out_faces,
