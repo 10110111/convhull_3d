@@ -270,6 +270,7 @@ static void ismember(int*, int*, int*, int, int);
 #ifdef CONVHULL_CREATE_DEFAULT_RESIZE
 static void* default_memory_resize(void* allocator, void* ptr, size_t size)
 {
+    (void)allocator;
     if (ptr)
         ch_stateful_free(allocator, ptr);
     return ch_stateful_malloc(allocator, size);
@@ -313,6 +314,7 @@ static void sort_float
     int i;
     struct float_w_idx *data;
     
+    (void)allocator;
     data = (float_w_idx*)ch_stateful_malloc(allocator, len*sizeof(float_w_idx));
     for(i=0;i<len;i++) {
         data[i].val=in_vec[i];
@@ -658,11 +660,6 @@ void convhull_3d_build_alloc
     CH_FLOAT A[(CONVHULL_3D_MAX_DIMENSIONS+1)*(CONVHULL_3D_MAX_DIMENSIONS+1)];
     int fVec[CONVHULL_3D_MAX_DIMENSIONS+1];
     int face_tmp[2];
-    
-    /* Check to make sure that faces are correctly oriented */
-    int bVec[CONVHULL_3D_MAX_DIMENSIONS+1];
-    for(i=0; i<d+1; i++)
-        bVec[i] = i;
     
     /* A contains the coordinates of the points forming a simplex */
     memset(A, 0, sizeof(A));
@@ -1171,6 +1168,8 @@ void extract_vertices_from_obj_file_alloc
     FILE* obj_file;
     char* filename_with_ext = (char*)malloc(strlen(obj_filename) + sizeof(".obj"));
     filename_with_ext[0] = '\0';
+    (void)allocator;
+
 #if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
     CV_STRCAT(filename_with_ext, ".obj");
     fopen_s(&obj_file, filename_with_ext, "r");
@@ -1343,11 +1342,6 @@ void convhull_nd_build_alloc
     CH_FLOAT A[(CONVHULL_ND_MAX_DIMENSIONS+1)*(CONVHULL_ND_MAX_DIMENSIONS+1)];
     int fVec[CONVHULL_ND_MAX_DIMENSIONS+1];
     int face_tmp[2];
-
-    /* Check to make sure that faces are correctly oriented */
-    int bVec[CONVHULL_ND_MAX_DIMENSIONS+1];
-    for(i=0; i<d+1; i++)
-        bVec[i] = i;
 
     /* A contains the coordinates of the points forming a simplex */
     memset(A, 0, sizeof(A));
@@ -1762,6 +1756,7 @@ void delaunay_nd_mesh_alloc
     int* hullfaces;
     CH_FLOAT w0, w_optimal, w_optimal2;
     CH_FLOAT* projpoints, *cf, *df, *p0, *p, *visible;
+    (void)allocator;
 
     /* Project the N-dimensional points onto a N+1-dimensional paraboloid */
     projpoints = (CH_FLOAT*)ch_stateful_malloc(allocator, nPoints*(nd+1)*sizeof(CH_FLOAT));
